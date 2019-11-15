@@ -1,1 +1,1 @@
-# graphql-react
+# graphql-cms
