@@ -1,0 +1,14 @@
+{
+  "serverPort": 5000,
+  "db": {
+    "host": "localhost",
+    "dialect": "postgres",
+    "database": "cms",
+    "username": "cms",
+    "password": "12345678"
+  },
+  "security": {
+    "secretKey": "some-secret-key",
+    "expiresIn": "7d"
+  }
+}
