@@ -1,3 +1,5 @@
+import { doLogin } from '../../utils/auth'
+
 export default {
   Query: {
     getUsers: (parent, args, { models }) => {
@@ -14,6 +16,7 @@ export default {
     }
   },
   Mutation: {
-    createUser: (parent, { input }, { models }) => models.User.create({ ...input })
+    createUser: (parent, { input }, { models }) => models.User.create({ ...input }),
+    login: (parent, { input: { email, password } }, { models }) => doLogin(email, password, models)
   }
 }
