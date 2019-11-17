@@ -1,3 +1,5 @@
+import { encrypt } from '../utils/security'
+
 export default (sequelize, { BOOLEAN, STRING, UUID, UUIDV4 }) => {
   const User = sequelize.define('User', {
     id: {
@@ -45,6 +47,12 @@ export default (sequelize, { BOOLEAN, STRING, UUID, UUIDV4 }) => {
       type: BOOLEAN,
       allowNull: false,
       defaultValue: false
+    }
+  }, {
+    hooks: {
+      beforeCreate: user => {
+        user.password = encrypt(user.password)
+      }
     }
   })
 

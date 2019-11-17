@@ -8,7 +8,7 @@
     "password": "12345678"
   },
   "security": {
-    "secretKey": "some-secret-key",
+    "secretKey": "Gr4pQlCM5",
     "expiresIn": "7d"
   }
 }
