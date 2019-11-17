@@ -11,9 +11,9 @@ export default {
           }]
         }]
       })
-    },
-    Mutation: {
-      createUser: (parent, { input }, { models }) => models.User.create({ ...input })
     }
+  },
+  Mutation: {
+    createUser: (parent, { input }, { models }) => models.User.create({ ...input })
   }
 }
