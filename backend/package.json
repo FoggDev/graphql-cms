@@ -10,8 +10,8 @@
   },
   "husky": {
     "hooks": {
-      "precommit": "npm lint",
-      "prepush": "npm test"
+      "pre-commit": "npm run lint",
+      "pre-push": "npm test"
     }
   },
   "author": "Carlos Santana",
