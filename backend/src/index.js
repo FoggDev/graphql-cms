@@ -27,5 +27,6 @@ const alter = true
 const force = false
 
 models.sequelize.sync({ alter, force }).then(() => {
+  // eslint-disable-next-line no-console
   apolloServer.listen(5000).then(({ url }) => console.log(`Running on ${url}`))
 })
