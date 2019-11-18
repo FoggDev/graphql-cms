@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js --ext js,graphql --exec babel-node",
-    "test": "jest src"
+    "test": "jest src",
+    "lint": "eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "npm lint",
+      "prepush": "npm test"
+    }
   },
   "author": "Carlos Santana",
   "license": "MIT",
