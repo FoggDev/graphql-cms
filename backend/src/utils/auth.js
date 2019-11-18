@@ -9,7 +9,7 @@ import { isPasswordMatch } from './is'
 // Configuration
 import { $security } from '../../config'
 
-const createToken = async user => {
+export const createToken = async user => {
   const { id, username, password, email, privilege, active } = user
   const token = setBase64(`${encrypt($security().secretKey)}${password}`)
   const userData = {
