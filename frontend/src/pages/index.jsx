@@ -1,4 +1,6 @@
 // Dependencies
 import React from 'react'
 
-export default () => <h1>Index Page</h1>
+import styles from './index.scss'
+
+export default () => <h1 className={styles.home}>Index Page</h1>
