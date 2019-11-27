@@ -12,6 +12,14 @@ const handle = nextApp.getRequestHandler()
 nextApp.prepare().then(() => {
   const app = express()
 
+  // Public static
+  app.use(express.static(path.join(__dirname, '../public')))
+
+  // Routes
+  app.get('/login', (req, res) => {
+    return nextApp.render(req, res, '/users/login', req.query)
+  })
+
   app.all('*', (req, res) => {
     return handle(req, res)
   })
