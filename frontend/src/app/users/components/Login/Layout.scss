@@ -1,0 +1,9 @@
+@import "../../../../shared/styles/_dependencies.scss";
+
+html, body {
+  background-color: $white;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: BlinkMacSystemFont, Helvetica, sans-serif;
+}

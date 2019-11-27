@@ -1,0 +1,44 @@
+@import '../../styles/_dependencies';
+
+.logo {
+  align-self: center;
+  width: 230px;
+
+  &.isotype {
+    width: auto;
+  }
+
+  &.center {
+    margin: 0 auto;
+  }
+
+  @include mobile {
+    padding: 20px 0px 20px 0px;
+    width: 197px;
+  }
+
+  a {
+    color: $doveGray;
+    display: block;
+    z-index: 200;
+
+    img {
+      display: inline-block;
+      margin: 0;
+      margin-right: 5px;
+      vertical-align: middle;
+      width: 65px;
+    }
+
+    .brand {
+      font-family: $openSans;
+      font-size: $xLarge;
+      font-weight: $bold;
+      vertical-align: middle;
+
+      .code {
+        color: $lochmara;
+      }
+    }
+  }
+}

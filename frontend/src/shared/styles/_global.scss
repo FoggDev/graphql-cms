@@ -1,0 +1,23 @@
+@import './_mixins';
+
+body {
+  background-color: $almostWhite;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  appearance: none;
+  background-clip: padding-box;
+  outline: none;
+  border: none;
+}
+
+a {
+  color: $codGray;
+  text-decoration: none;
+
+  &:hover {
+    color: $dodgerBlue;
+  }
+}
