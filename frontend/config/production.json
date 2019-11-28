@@ -1,0 +1,19 @@
+{
+  "baseUrl": "http://www.dev.education",
+  "api": {
+    "uri": "http://www.dev.education/graphql",
+    "credentials": "same-origin"
+  },
+  "debug": false,
+  "cache": {
+    "enable": true,
+    "whitelist": []
+  },
+  "session": {
+    "cookieDomain": "www.dev.education",
+    "maxAge": 604800,
+    "cookiePrefix": "",
+    "path": "/",
+    "httpOnly": true
+  }
+}

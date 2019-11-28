@@ -1,0 +1,7 @@
+{
+  "serverPort": 3000,
+  "languages": {
+    "default": "es",
+    "list": ["es", "en"]
+  }
+}

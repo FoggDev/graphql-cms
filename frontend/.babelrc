@@ -1,3 +1,18 @@
 {
-  "presets": ["next/babel"]
+  "presets": ["next/babel"],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "@app": "./src/app",
+        "@components": "./src/shared/components",
+        "@config": "./config",
+        "@layout": "./src/shared/components/layout",
+        "@pages": "./src/pages",
+        "@shared": "./src/shared",
+        "@styles": "./src/shared/styles",
+        "@users": "./src/app/users"
+      }
+    }]
+  ]
 }
