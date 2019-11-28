@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { DarkButton, PrimaryButton, Input, RenderIf } from 'fogg-ui'
 
 // Components
-import Logo from '../../../../shared/components/layout/Logo'
+import Logo from '@layout/Logo'
 
 // Styles
 import styles from './Login.scss'

@@ -3,6 +3,9 @@ import express from 'express'
 import next from 'next'
 import path from 'path'
 
+// Configuration
+import config from '@config'
+
 // Settings up Next App
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
@@ -25,5 +28,5 @@ nextApp.prepare().then(() => {
   })
 
   // Listening port 3000
-  app.listen(3000)
+  app.listen(config.serverPort)
 })
