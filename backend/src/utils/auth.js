@@ -1,10 +1,7 @@
 // Dependencies
 import jwt from 'jsonwebtoken'
 import { AuthenticationError } from 'apollo-server'
-
-// Utils
-import { encrypt, setBase64 } from './security'
-import { isPasswordMatch } from './is'
+import { isPasswordMatch, encrypt, setBase64 } from 'fogg-utils'
 
 // Configuration
 import { $security } from '../../config'

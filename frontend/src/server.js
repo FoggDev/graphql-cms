@@ -3,13 +3,13 @@ import express from 'express'
 import next from 'next'
 import path from 'path'
 
+// Configuration
+import config from '@config'
+
 // Settings up Next App
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
-
-// Configuration
-import config from '@config'
 
 // Running Next App
 nextApp.prepare().then(() => {
