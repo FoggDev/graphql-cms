@@ -1,5 +1,5 @@
+import { isFunction } from 'fogg-utils'
 import post from '../post'
-import { isFunction } from '../../../utils/is'
 
 describe('#Query', () => {
   it('should have getPosts method', async () => {
