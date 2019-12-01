@@ -6,7 +6,13 @@
   "scripts": {
     "dev": "babel-node src/server.js",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production babel-node src/server.js"
+    "start": "cross-env NODE_ENV=production babel-node src/server.js",
+    "lint": "eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   },
   "author": "Carlos Santana",
   "license": "MIT",
@@ -22,8 +28,14 @@
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/node": "^7.7.0",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-preset-next": "^1.2.0",
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "husky": "^3.1.0"
   }
 }
