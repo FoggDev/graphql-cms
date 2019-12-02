@@ -1,8 +1,0 @@
-type Tag {
-  id: UUID!,
-  name: String!
-}
-
-input TagsInput {
-  name: String!
-}
