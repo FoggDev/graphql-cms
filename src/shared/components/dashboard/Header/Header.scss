@@ -1,0 +1,53 @@
+@import "~styles/_dependencies.scss";
+
+.header {
+  background-color: $tuna;
+  height: 50px;
+  line-height: 50px;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 96%;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .logo {
+      h1 {
+        @include prefix(background-clip, text)
+        color: $white;
+        font-family: $poppins;
+        font-size: 18px;
+        font-weight: 900;
+        margin: 0;
+        padding: 0;
+        text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+        text-transform: uppercase;
+      }
+    }
+
+    .userProfile {
+      color: $white;
+      display: flex;
+      justify-content: space-between;
+      width: 145px;
+
+      .avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          border-radius: 50%;
+          line-height: 35px;
+          height: 35px;
+        }
+      }
+
+      .name {
+        font-size: 14px;
+      }
+    }
+  }
+}

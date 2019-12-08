@@ -1,0 +1,19 @@
+@import '~styles/_dependencies';
+
+body {
+  background-color: $white;
+  font-family: $openSans;
+}
+
+.wrapper {
+  display: flex;
+}
+
+h2 {
+  color: $tuna;
+  font-size: 24px;
+  line-height: 36px;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 5px;
+}

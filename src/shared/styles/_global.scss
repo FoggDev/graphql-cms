@@ -12,12 +12,3 @@ input {
   outline: none;
   border: none;
 }
-
-a {
-  color: $codGray;
-  text-decoration: none;
-
-  &:hover {
-    color: $dodgerBlue;
-  }
-}

@@ -1,4 +1,12 @@
-// Dependencies
-import React from 'react'
+// Components
+import DashboardLayout from '@app/dashboard/components/Layout'
 
-export default () => <h1>Dashboard Page</h1>
+const Dashboard = props => (
+  <DashboardLayout {...props} />
+)
+
+Dashboard.getInitialProps = ({ req }) => ({
+  params: req.params
+})
+
+export default Dashboard
