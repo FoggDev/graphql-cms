@@ -1,0 +1,23 @@
+@import "~styles/_dependencies.scss";
+
+.triangle {
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid $alto;
+  border-top: 8px solid transparent;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 12px;
+  width: 0;
+
+  .inner {
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid $white;
+    border-top: 8px solid transparent;
+    height: 0;
+    left: 1px;
+    position: relative;
+    top: -8px;
+    width: 0;
+  }
+}

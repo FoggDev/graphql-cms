@@ -1,0 +1,60 @@
+@import "~styles/_dependencies.scss";
+
+.sidebar {
+  background-color: $almostWhite;
+  border-right: 1px solid $alto;
+  font-size: 14px;
+  height: 100vh;
+  width: 200px;
+
+  .navbar {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      position: relative;
+
+      a {
+        display: block;
+        padding: 10px 0 10px 20px;
+        border-top: 1px solid $white;
+        border-bottom: 1px solid $loblolly;
+        color: $shuttleGray;
+        text-decoration: none;
+        text-shadow: 0 1px 0 $white;
+        font-weight: bold;
+        width: 100%;
+
+        i {
+          width: 18px;
+        }
+
+        .badge {
+          display: inline-block;
+          position: absolute;
+          right: 10px;
+          top: 9px;
+          text-shadow: none;
+        }
+
+        &:hover {
+          background-color: $tuna;
+          border-top: 1px solid $tuna;
+          border-bottom: 1px solid $tuna;
+          color: $white;
+          text-shadow: 0 1px 0 $black;
+        }
+
+        &.active {
+          background-color: $rss;
+          border-top: 1px solid $rss;
+          border-bottom: 1px solid $rss;
+          color: $white;
+          text-shadow: 0 1px 0 $black;
+        }
+      }
+    }
+  }
+}

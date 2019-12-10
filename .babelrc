@@ -9,12 +9,14 @@
         "@components": "./src/shared/components",
         "@config": "./config",
         "@contexts": "./src/contexts",
+        "@dashboard": "./src/shared/components/dashboard",
         "@graphql": "./src/graphql",
         "@layout": "./src/shared/components/layout",
         "@middlewares": "./src/shared/lib/middlewares",
         "@pages": "./src/pages",
         "@shared": "./src/shared",
         "@styles": "./src/shared/styles",
+        "@ui": "./src/shared/components/ui",
         "@users": "./src/app/users"
       }
     }]
