@@ -42,8 +42,15 @@ nextApp.prepare().then(() => {
     return nextApp.render(req, res, '/users/login', req.query)
   })
 
-  app.get('/dashboard', isConnected(true, 'god', '/login?redirectTo=/dashboard'), (req, res) => {
-    return nextApp.render(req, res, '/dashboard', req.query)
+  app.get('/logout', (req, res) => {
+    res.clearCookie('at')
+    res.redirect('/')
+  })
+
+  app.get('/dashboard/:app?/:action?', isConnected(true, 'god', '/login?redirectTo=/dashboard'), (req, res) => {
+    const { app = 'home' } = req.params
+
+    return nextApp.render(req, res, `/dashboard/${app}`, req.query)
   })
 
   app.all('*', (req, res) => {

@@ -1,11 +1,11 @@
 // Dependencies
 import React, { Component } from 'react'
 import { Alert, DarkButton, PrimaryButton, Input, RenderIf } from 'fogg-ui'
-import { func, string } from 'prop-types'
-import { cx, redirectTo } from 'fogg-utils'
+import propTypes from '@propTypes'
+import { redirectTo } from 'fogg-utils'
 
 // Components
-import Logo from '@layout/Logo'
+import Logo from '@layouts/main/Logo'
 
 // Contexts
 import { FormContext } from '@contexts/form'
@@ -58,6 +58,7 @@ class Login extends Component {
                 <Logo center />
 
                 <Input
+                  autoComplete="off"
                   type="email"
                   className={styles.email}
                   name="email"
@@ -67,6 +68,7 @@ class Login extends Component {
                 />
 
                 <Input
+                  autoComplete="off"
                   type="password"
                   className={styles.password}
                   name="password"
@@ -101,8 +103,8 @@ class Login extends Component {
 Login.contextType = FormContext
 
 Login.propTypes = {
-  login: func,
-  currentUrl: string
+  login: propTypes.login,
+  currentUrl: propTypes.currentUrl
 }
 
 export default Login

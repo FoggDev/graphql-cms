@@ -5,10 +5,6 @@ body {
   font-family: $openSans;
 }
 
-.wrapper {
-  display: flex;
-}
-
 h2 {
   color: $tuna;
   font-size: 24px;
@@ -16,4 +12,10 @@ h2 {
   margin: 0;
   padding: 0;
   padding-bottom: 5px;
+}
+
+.layout {
+  .wrapper {
+    display: flex;
+  }
 }

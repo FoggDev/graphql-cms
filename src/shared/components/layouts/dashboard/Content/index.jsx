@@ -1,6 +1,6 @@
 // Dependencies
 import React, { PureComponent } from 'react'
-import { element } from 'prop-types'
+import propTypes from '@propTypes'
 
 // Styles
 import styles from './Content.scss'
@@ -18,7 +18,7 @@ class Content extends PureComponent {
 }
 
 Content.propTypes = {
-  children: element.isRequired
+  children: propTypes.children.isRequired
 }
 
 export default Content
