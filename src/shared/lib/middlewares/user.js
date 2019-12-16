@@ -1,36 +1,12 @@
-// Dependencies
-import jwt from 'jsonwebtoken'
-import { getBase64 } from 'fogg-utils'
-
-// Configuration
-import config from '@config'
+import { verify } from '../jwt'
 
 export function User(req) {
-  const { security: { secretKey } } = config
-
-  function jwtVerify(cb, at = false) {
-    const accessToken = req.cookies.at || at
-
-    jwt.verify(accessToken, secretKey, (error, accessTokenData = {}) => {
-      const { data: user } = accessTokenData
-
-      if (error || !user) {
-        return cb(false)
-      }
-
-      return cb(getBase64(user))
-    })
-  }
-
-  async function getUserData() {
-    const UserPromise = new Promise(resolve => jwtVerify(user => resolve(user)))
-    const user = await UserPromise
-    return user
+  function jwtVerify(cb) {
+    return verify(cb, req.cookies)
   }
 
   return {
-    jwtVerify,
-    getUserData
+    jwtVerify
   }
 }
 

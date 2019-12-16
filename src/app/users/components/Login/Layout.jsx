@@ -1,30 +1,27 @@
 // Dependencies
-import React from 'react'
-import Head from 'next/head'
-import { string } from 'prop-types'
+import React, { useContext } from 'react'
+import propTypes from '@propTypes'
 
 // Contexts
 import { UserContext } from '@contexts/user'
 
 // Components
+import Title from '@ui/Title'
 import Login from './Login'
 
-// Styles
-import styles from './Layout.scss'
+const Layout = ({ currentUrl }) => {
+  const { login } = useContext(UserContext)
 
-const Layout = ({ currentUrl }) => (
-  <>
-    <Head>
-      <title>Login</title>
-      <meta name="title" content="Login" />
-    </Head>
+  return (
+    <>
+      <Title content="Login" />
+      <Login login={login} currentUrl={currentUrl} />
+    </>
+  )
+}
 
-    <UserContext.Consumer>
-      {({ login }) => (
-        <Login login={login} currentUrl={currentUrl} />
-      )}
-    </UserContext.Consumer>
-  </>
-)
+Layout.propTypes = {
+  currentUrl: propTypes.currentUrl
+}
 
 export default Layout

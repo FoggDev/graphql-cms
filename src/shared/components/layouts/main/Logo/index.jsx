@@ -1,6 +1,6 @@
 // Dependencies
 import React from 'react'
-import { bool } from 'prop-types'
+import propTypes from '@propTypes'
 import { Retina } from 'fogg-ui'
 
 // Components
@@ -10,7 +10,7 @@ import Link from 'next/link'
 import styles from './Logo.scss'
 
 const Logo = props => {
-  const { isotype = '', center = '' } = props;
+  const { isotype = '', center = '' } = props
 
   return (
     <div className={`${styles.logo} ${center && styles.center} ${isotype && styles.isotype}`}>
@@ -27,12 +27,12 @@ const Logo = props => {
         </a>
       </Link>
     </div>
-  );
-};
+  )
+}
 
 Logo.propTypes = {
-  center: bool,
-  isotype: bool
+  center: propTypes.center,
+  isotype: propTypes.isotype
 }
 
 export default Logo

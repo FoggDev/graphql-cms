@@ -1,6 +1,6 @@
 // Dependencies
 import { ApolloProvider } from 'react-apollo-hooks'
-import { string } from 'prop-types'
+import propTypes from '@propTypes'
 import { isBrowser } from 'fogg-utils'
 
 // Hooks
@@ -26,7 +26,7 @@ const LoginPage = ({
 )
 
 LoginPage.propTypes = {
-  currentUrl: string
+  currentUrl: propTypes.currentUrl
 }
 
 export default LoginPage

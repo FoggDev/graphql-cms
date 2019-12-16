@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, createContext } from 'react'
-import { element, object } from 'prop-types'
+import propTypes from '@propTypes'
 
 export const FormContext = createContext({
   handleInputChange: () => undefined,
@@ -30,8 +30,8 @@ const FormProvider = ({ children, initialValues = {} }) => {
 }
 
 FormProvider.propTypes = {
-  children: element.isRequired,
-  initialValues: object
+  children: propTypes.children.isRequired,
+  initialValues: propTypes.initialValues
 }
 
 export default FormProvider
