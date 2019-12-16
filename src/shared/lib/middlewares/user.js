@@ -12,8 +12,6 @@ export function User(req) {
 
 export const isConnected = (isLogged = true, privilege = 'user', redirectTo = '/') => (req, res, next) => {
   User(req).jwtVerify(user => {
-    req.user = user || null
-
     if (!user && !isLogged) {
       return next()
     } else if (user && isLogged) {

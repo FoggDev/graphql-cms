@@ -47,10 +47,10 @@ nextApp.prepare().then(() => {
     res.redirect('/')
   })
 
-  app.get('/dashboard/:app?/:action?', isConnected(true, 'god', '/login?redirectTo=/dashboard'), (req, res) => {
-    const { app = 'home' } = req.params
+  app.get('/dashboard/:module?/:action?', isConnected(true, 'god', '/login?redirectTo=/dashboard'), (req, res) => {
+    const { module = 'home' } = req.params
 
-    return nextApp.render(req, res, `/dashboard/${app}`, req.query)
+    return nextApp.render(req, res, `/dashboard/${module}`, req.query)
   })
 
   app.all('*', (req, res) => {
