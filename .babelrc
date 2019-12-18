@@ -4,6 +4,7 @@
     ["module-resolver", {
       "root": ["./"],
       "alias": {
+        "@actions": "./src/app/dashboard/components/actions",
         "@apollo-client": "./src/shared/lib/apollo.js",
         "@app": "./src/app",
         "@components": "./src/shared/components",

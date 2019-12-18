@@ -1,0 +1,27 @@
+@import '~styles/_dependencies';
+
+.create {
+  .label {
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  .inputBlock {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .slug {
+    font-family: Arial;
+    color: $gray;
+    font-size: 11px;
+    margin-top: -25px;
+    padding: 0;
+
+    span {
+      color: $dodgerBlue;
+      font-weight: bold;
+    }
+  }
+}
