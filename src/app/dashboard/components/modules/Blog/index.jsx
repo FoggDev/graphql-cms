@@ -1,7 +1,7 @@
 // Dependencies
 import React, { useContext } from 'react'
 import propTypes from '@propTypes'
-import { slugFn } from 'fogg-utils'
+import { DarkButton } from 'fogg-ui'
 
 // Contexts
 import { BlogContext } from '@contexts/blog'
@@ -13,27 +13,8 @@ import Title from '@ui/Title'
 // Actions
 import Create from '@actions/Create'
 
-const schema = {
-  title: {
-    type: 'input',
-    required: true,
-    slug: {
-      field: 'slug',
-      fn: slugFn
-    }
-  },
-  content: {
-    type: 'textarea',
-    required: true
-  },
-  userId: {
-    type: 'hidden',
-    required: true
-  },
-  tags: {
-    type: 'input'
-  }
-}
+// Schema
+import schema from '@schemas/blog'
 
 const Blog = ({ action, user }) => {
   const {
@@ -53,6 +34,8 @@ const Blog = ({ action, user }) => {
       <Title content="Blog - Dashboard" />
 
       <h1>Blog Module</h1>
+
+      <DarkButton href="/dashboard/blog/create">Create Post</DarkButton>
     </>
   )
 }

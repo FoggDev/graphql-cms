@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from 'react'
-import { Alert, DarkButton, Input, TextArea, RenderIf } from 'fogg-ui'
+import { Alert, Select, PrimaryButton, Input, TextArea, RenderIf, Tags } from 'fogg-ui'
+import { slugFn, getRandomCode } from 'fogg-utils'
 import propTypes from '@propTypes'
 
 // Contexts
@@ -12,50 +13,66 @@ import styles from './Create.scss'
 class Create extends Component {
   state = {
     errorMessage: '',
-    successMessage: ''
+    successMessage: '',
+    messages: {},
+    randomKey: getRandomCode()
   }
 
   handleCreate = async values => {
     const { create } = this.props
     const { clearValues } = this.context
-
     const response = await create(values)
 
     if (response.error) {
       this.setState({
-        errorMessage: response.message,
-        successMessage: ''
+        errorMessage: response.alert,
+        successMessage: '',
+        messages: response.messages
       })
     } else {
-      clearValues(['description', 'points'])
+      clearValues(['title', 'slug', 'content', 'tags'])
 
       this.setState({
         successMessage: 'Created successfuly',
-        errorMessage: ''
+        errorMessage: '',
+        messages: {},
+        randomKey: getRandomCode()
       })
     }
   }
 
-  renderForm = (schema) => {
-    const { handleInputChange, values } = this.context
-    const url = `${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ''}`
+  renderFields = schema => {
+    const { handleInputChange, setValue, values } = this.context
+    const { messages, randomKey } = this.state
 
     return Object.keys(schema).map(field => {
-      const { type, slug } = schema[field]
+      const { label, type, options, slug, theme, defaultValue } = schema[field]
+      let currentValue = values[field]
 
       if (type === 'input') {
+        if (!values[field]) {
+          currentValue = defaultValue || values[field]
+        }
+
         return (
-          <div className={styles.inputBlock}>
-            <p>
-              <label className={styles.label}>{field}</label>
-            </p>
+          <div key={field} className={styles.inputBlock}>
+            <div>
+              <label className={styles.label}>{label}</label>
+              {messages[field] ? <span className={styles.error}>{messages[field].msg}</span> : ''}
+            </div>
 
             <Input
               key={field}
               autoComplete="off"
               name={field}
-              onChange={handleInputChange}
-              value={values[field]}
+              onChange={e => {
+                handleInputChange(e)
+
+                if (slug) {
+                  setValue('slug', slugFn(e.target.value))
+                }
+              }}
+              value={currentValue}
               placeholder={`Add ${field} here`}
               style={{
                 width: '75%'
@@ -63,16 +80,8 @@ class Create extends Component {
             />
 
             {slug && (
-              <div className={styles.slug}>
-                {url}/blog/<span>{slug.fn(values[field])}</span>
-
-                <Input
-                  key={slug.field}
-                  autoComplete="off"
-                  type="hidden"
-                  name={slug.field}
-                  value={slug.fn(values[field])}
-                />
+              <div key="slug" className={styles.slug}>
+                URL: /blog/<span>{slugFn(values[field])}</span>
               </div>
             )}
           </div>
@@ -81,21 +90,62 @@ class Create extends Component {
 
       if (type === 'textarea') {
         return (
-          <div className={styles.textAreaBlock}>
-            <p>
-              <label className={styles.label}>{field}</label>
-            </p>
+          <div key={field} className={styles.textAreaBlock}>
+            <div>
+              <label className={styles.label}>{label}</label>
+              {messages[field] ? <span className={styles.error}>{messages[field].msg}</span> : ''}
+            </div>
 
             <TextArea
-              key={field}
+              key={`${field}-textarea`}
               name={field}
               onChange={handleInputChange}
-              value={values[field]}
               placeholder={`Add ${field} here`}
               style={{
+                height: '300px',
                 width: '75%'
               }}
+            >
+              {values[field]}
+            </TextArea>
+          </div>
+        )
+      }
+
+      if (type === 'select') {
+        if (!options) {
+          return null
+        }
+
+        return (
+          <div key={field} className={styles.selectBlock}>
+            <div>
+              <label className={styles.label}>{label}</label>
+              {messages[field] ? <span className={styles.error}>{messages[field].msg}</span> : ''}
+            </div>
+
+            <Select
+              label={`Select ${field}`}
+              name={field}
+              type={theme}
+              onClick={({ value }) => {
+                setValue(field, value)
+              }}
+              options={options}
             />
+          </div>
+        )
+      }
+
+      if (type === 'tags') {
+        return (
+          <div key={field}>
+            <div>
+              <label className={styles.label}>{label}</label>
+              {messages[field] ? <span className={styles.error}>{messages[field].msg}</span> : ''}
+            </div>
+
+            <Tags key={`${field}-${randomKey}`} getTags={tags => setValue(field, tags)} />
           </div>
         )
       }
@@ -118,17 +168,25 @@ class Create extends Component {
         <h1>Create {module}</h1>
 
         <RenderIf isTrue={errorMessage}>
-          <Alert danger center flat>{errorMessage}</Alert>
+          <Alert danger center flat style={{ display: 'inline-block' }}>
+            {errorMessage}
+          </Alert>
         </RenderIf>
 
         <RenderIf isTrue={successMessage}>
-          <Alert success center flat>{successMessage}</Alert>
+          <Alert success center flat style={{ display: 'inline-block' }}>
+            {successMessage}
+          </Alert>
         </RenderIf>
 
         <form>
-          {this.renderForm(schema)}
+          {this.renderFields(schema)}
 
-          <DarkButton onClick={() => this.handleCreate(values)}>Save</DarkButton>
+          <PrimaryButton
+            onClick={() => this.handleCreate(values)}
+          >
+            Save
+          </PrimaryButton>
         </form>
       </div>
     )
@@ -138,7 +196,9 @@ class Create extends Component {
 Create.contextType = FormContext
 
 Create.propTypes = {
-  create: propTypes.create
+  create: propTypes.create,
+  module: propTypes.module,
+  schema: propTypes.schema
 }
 
 export default Create

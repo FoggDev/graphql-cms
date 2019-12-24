@@ -23,11 +23,6 @@ const validations = {
       msg: 'Title is empty'
     }
   },
-  slug: {
-    isEmpty: {
-      msg: 'Slug is empty'
-    }
-  },
   content: {
     isEmpty: {
       msg: 'Content is empty'
@@ -36,40 +31,37 @@ const validations = {
 }
 
 function validate(validations, values) {
-  const messages = []
+  const messages = {}
 
   Object.keys(validations).forEach(field => {
     const { len, isEmpty } = validations[field]
 
     if (len && len.arg) {
       if (values[field].length !== len.arg) {
-        messages.push({
-          [field]: {
-            msg: len.msg
-          }
-        })
+        messages[field] = {
+          msg: len.msg
+        }
       }
     }
 
     if (isEmpty) {
-      if (values[field] === '') {
-        messages.push({
-          [field]: {
-            msg: isEmpty.msg
-          }
-        })
+      if (values[field] === '' || !values[field]) {
+        messages[field] = {
+          msg: isEmpty.msg
+        }
       }
     }
-
-    return messages.length > 0
-      ? {
-        error: true,
-        messages
-      }
-      : {
-        error: false
-      }
   })
+
+  return Object.keys(messages).length > 0
+    ? {
+      error: true,
+      alert: 'Error trying to create post',
+      messages
+    }
+    : {
+      error: false
+    }
 }
 
 export const BlogContext = createContext({
@@ -83,23 +75,40 @@ const BlogProvider = ({ children }) => {
   const [posts, setPosts] = useState([])
 
   async function create(values) {
-    try {
-      const messages = validate(validations, values)
+    let messages = validate(validations, values)
 
-      if (messages.error) {
-        return messages
+    if (messages.error) {
+      return messages
+    }
+
+    const { errors, data } = await mutate({
+      mutation: CREATE_POST,
+      variables: values,
+      errorPolicy: 'all'
+    })
+
+    if (errors && errors.length > 0) {
+      const [{ extensions: { exception } }] = errors
+
+      if (exception.name === 'SequelizeUniqueConstraintError') {
+        messages = {
+          error: true,
+          alert: `The post with title "${values.title}" already exists`,
+          messages: {
+            title: {
+              msg: 'Change the title'
+            }
+          }
+        }
       }
+    }
 
-      const { data } = await mutate({
-        mutation: CREATE_POST,
-        variables: values
-      })
+    if (messages.error) {
+      return messages
+    }
 
-      if (data) {
-        return data.createPost
-      }
-    } catch (err) {
-      return getGraphQlError(err)
+    if (data) {
+      return data.createPost
     }
   }
 

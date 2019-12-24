@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { Alert, DarkButton, PrimaryButton, Input, RenderIf } from 'fogg-ui'
 import propTypes from '@propTypes'
-import { redirectTo } from 'fogg-utils'
+import { cx, redirectTo } from 'fogg-utils'
 
 // Components
 import Logo from '@layouts/main/Logo'
@@ -51,50 +51,48 @@ class Login extends Component {
           <Alert danger center flat>{errorMessage}</Alert>
         </RenderIf>
 
-        <RenderIf isTrue={ready}>
-          <div className={styles.login}>
-            <div className={styles.wrapper}>
-              <div className={styles.form}>
-                <Logo center />
+        <div className={cx(styles.login)}>
+          <div className={cx(styles.wrapper, ready ? styles.ready : '')}>
+            <form className={styles.form}>
+              <Logo center />
 
-                <Input
-                  autoComplete="off"
-                  type="email"
-                  className={styles.email}
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleInputChange}
-                  value={values.email}
-                />
+              <Input
+                autoComplete="off"
+                type="email"
+                className={styles.email}
+                name="email"
+                placeholder="Email"
+                onChange={handleInputChange}
+                value={values.email}
+              />
 
-                <Input
-                  autoComplete="off"
-                  type="password"
-                  className={styles.password}
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleInputChange}
-                  value={values.password}
-                />
+              <Input
+                autoComplete="off"
+                type="password"
+                className={styles.password}
+                name="password"
+                placeholder="Password"
+                onChange={handleInputChange}
+                value={values.password}
+              />
 
-                <div className={styles.actions}>
-                  <div className={styles.left}>
-                    <DarkButton
-                      name="login"
-                      onClick={() => this.handleLogin(values)}
-                    >
-                      Login
-                    </DarkButton>
-                    &nbsp;
-                    <PrimaryButton name="register">
-                      Register
-                    </PrimaryButton>
-                  </div>
+              <div className={styles.actions}>
+                <div className={styles.left}>
+                  <DarkButton
+                    name="login"
+                    onClick={() => this.handleLogin(values)}
+                  >
+                    Login
+                  </DarkButton>
+                  &nbsp;
+                  <PrimaryButton name="register">
+                    Register
+                  </PrimaryButton>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
-        </RenderIf>
+        </div>
       </>
     )
   }

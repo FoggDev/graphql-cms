@@ -1,7 +1,7 @@
 // Dependencies
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
-import { getModuleInfo } from 'fogg-utils'
+import { getModuleInfo, isBrowser } from 'fogg-utils'
 
 // Components
 import Header from '@layouts/dashboard/Header'
@@ -33,7 +33,7 @@ const Layout = () => {
     user
   }
 
-  if (!user) {
+  if (isBrowser() && !user) {
     return null
   }
 
