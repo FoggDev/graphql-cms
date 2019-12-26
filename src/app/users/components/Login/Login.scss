@@ -1,6 +1,12 @@
 @import "~styles/_dependencies.scss";
 
 .login {
+  visibility: hidden;
+
+  .ready {
+      visibility: visible;
+  }
+
   .wrapper {
     background-color: $white;
     color: $mineShaft;

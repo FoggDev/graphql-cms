@@ -4,6 +4,7 @@ import { ApolloClient } from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { ApolloLink } from 'apollo-link'
+import { ErrorLink } from 'apollo-link-error'
 
 // Configuration
 import config from '@config'
@@ -15,6 +16,8 @@ export default () => {
     fetch
   })
 
+  const errorLink = new ErrorLink(error => console.error('GraphQL Error:', error))
+
   const cache = new InMemoryCache({
     dataIdFromObject: object => object.id || null,
     addTypename: false
@@ -22,7 +25,7 @@ export default () => {
 
   const client = new ApolloClient({
     connectToDevTools: true,
-    link: ApolloLink.from([httpLink]),
+    link: ApolloLink.from([errorLink, httpLink]),
     cache
   })
 

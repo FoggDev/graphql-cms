@@ -7,6 +7,9 @@ module.exports = withSass({
   cssLoaderOptions: {
     localIdentName: '[name]__[local]__[hash:base64:5]'
   },
+  devIndicators: {
+    autoPrerender: false
+  },
   webpack: config => {
     config.resolve.alias.styles = path.resolve(__dirname, './src/shared/styles')
 
