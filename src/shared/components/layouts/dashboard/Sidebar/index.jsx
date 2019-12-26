@@ -18,7 +18,7 @@ class Sidebar extends PureComponent {
       <aside className={styles.sidebar}>
         <ul className={styles.navbar}>
           <li>
-            <Link href="/dashboard" className={module === 'home' && styles.active}>
+            <Link href="/dashboard" className={module === 'home' ? styles.active : ''}>
               <Icon type="fas fa-home" />
               {' '}
               Dashboard
@@ -29,7 +29,7 @@ class Sidebar extends PureComponent {
             </RenderIf>
           </li>
           <li>
-            <Link href="/dashboard/blog" className={module === 'blog' && styles.active}>
+            <Link href="/dashboard/blog" className={module === 'blog' ? styles.active : ''}>
               <Icon type="fas fa-book" />
               {' '}
               Blog
@@ -40,7 +40,7 @@ class Sidebar extends PureComponent {
             </RenderIf>
           </li>
           <li>
-            <Link href="/dashboard/comments" className={module === 'comments' && styles.active}>
+            <Link href="/dashboard/comments" className={module === 'comments' ? styles.active : ''}>
               <Icon type="fas fa-comments" />
               {' '}
               Comments
@@ -55,7 +55,7 @@ class Sidebar extends PureComponent {
             </RenderIf>
           </li>
           <li>
-            <Link href="/dashboard/users" className={module === 'users' && styles.active}>
+            <Link href="/dashboard/users" className={module === 'users' ? styles.active : ''}>
               <Icon type="fas fa-users" />
               {' '}
               Users

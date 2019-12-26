@@ -1,4 +1,13 @@
-import { array, bool, element, func, shape, object, oneOfType, string } from 'prop-types'
+import {
+  array,
+  bool,
+  element,
+  func,
+  object,
+  oneOfType,
+  shape,
+  string
+} from 'prop-types'
 
 export default {
   action: string,
@@ -11,6 +20,7 @@ export default {
   ]),
   className: string,
   content: string,
+  create: func,
   currentUrl: string,
   href: string,
   initialValues: object,
@@ -18,6 +28,7 @@ export default {
   module: string,
   login: func,
   onClick: func,
+  schema: object,
   user: shape({
     id: string,
     username: string,

@@ -1,0 +1,38 @@
+@import '~styles/_dependencies';
+
+.create {
+  .label {
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  .inputBlock {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .error {
+    font-size: 10px;
+    color: red;
+    margin-left: 5px;
+  }
+
+  .slug {
+    font-family: Arial;
+    color: $gray;
+    font-size: 11px;
+    margin-top: -12px;
+    margin-left: 2px;
+    padding-bottom: 20px;
+
+    span {
+      color: $rss;
+      font-weight: bold;
+    }
+  }
+
+  .selectBlock {
+    margin-bottom: 20px;
+  }
+}
