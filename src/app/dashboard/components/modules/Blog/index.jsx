@@ -1,5 +1,5 @@
 // Dependencies
-import React from 'react'
+import React, { useContext } from 'react'
 import propTypes from '@propTypes'
 import { DarkButton } from 'fogg-ui'
 
@@ -8,6 +8,7 @@ import Title from '@ui/Title'
 
 // Contexts
 import FormProvider from '@contexts/form'
+import { BlogContext } from '@contexts/blog'
 
 // Actions
 import Create from '@actions/Create'
@@ -16,10 +17,16 @@ import Create from '@actions/Create'
 import schema from '@schemas/blog'
 
 const Blog = ({ action, user }) => {
+  const { create } = useContext(BlogContext)
+
   if (action === 'create') {
     return (
       <FormProvider initialValues={{ userId: user.id }}>
-        <Create module="Post" schema={schema} />
+        <Create
+          module="Post"
+          schema={schema}
+          create={create}
+        />
       </FormProvider>
     )
   }

@@ -12,6 +12,7 @@ export default {
   readingTime: {
     label: 'Reading Time',
     type: 'select',
+    theme: 'dark',
     options: [
       {
         option: '3 minutes',
