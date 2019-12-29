@@ -20,7 +20,8 @@
         "@schemas": "./src/shared/schemas",
         "@styles": "./src/shared/styles",
         "@ui": "./src/shared/components/ui",
-        "@users": "./src/app/users"
+        "@users": "./src/app/users",
+        "@validations": "./src/shared/validations"
       }
     }]
   ]

@@ -27,10 +27,12 @@ import styles from './Layout.scss'
 const Layout = () => {
   const router = useRouter()
   const { user } = useContext(UserContext)
-  const { module, action } = getModuleInfo(router)
+  const { module, action, id } = getModuleInfo(router)
+
   const moduleProps = {
     action,
-    user
+    user,
+    id
   }
 
   if (isBrowser() && !user) {

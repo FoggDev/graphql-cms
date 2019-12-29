@@ -12,6 +12,8 @@ import {
 export default {
   action: string,
   appName: string,
+  body: array,
+  caption: string,
   center: bool,
   children: oneOfType([
     array,
@@ -22,12 +24,15 @@ export default {
   content: string,
   create: func,
   currentUrl: string,
+  head: array,
   href: string,
+  id: string,
   initialValues: object,
   isotype: bool,
   module: string,
   login: func,
   onClick: func,
+  read: func,
   schema: object,
   user: shape({
     id: string,

@@ -10,7 +10,7 @@ export default gql`
     $language: String!,
     $published: Boolean!,
     $userId: UUID!,
-    $tags: [TagsInput],
+    $tags: [TagsInput]
   ) {
     createPost(
       input: {
