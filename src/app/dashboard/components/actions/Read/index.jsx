@@ -24,7 +24,6 @@ class Read extends Component {
 
   fetchData = async () => {
     const { read, page } = this.props
-
     const { count, data } = await read(Number(page))
 
     this.setState({
