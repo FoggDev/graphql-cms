@@ -26,13 +26,15 @@ import styles from './Layout.scss'
 
 const Layout = () => {
   const router = useRouter()
+  const { page = 1 } = router.query
   const { user } = useContext(UserContext)
   const { module, action, id } = getModuleInfo(router)
 
   const moduleProps = {
     action,
     user,
-    id
+    id,
+    page
   }
 
   if (isBrowser() && !user) {

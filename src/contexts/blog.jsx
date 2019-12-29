@@ -62,7 +62,7 @@ const BlogProvider = ({ children }) => {
     }
   }
 
-  async function getPosts() {
+  async function getPosts(page) {
     const { data: count } = await query({
       query: GET_POSTS_COUNT,
     })
@@ -73,7 +73,7 @@ const BlogProvider = ({ children }) => {
         orderBy: 'createdAt',
         direction: 'DESC',
         limit: 10,
-        offset: 0
+        offset: Number(page) === 1 ? 0 : (Number(page) - 1) * 10
       }
     })
 

@@ -12,10 +12,20 @@ class Read extends Component {
     data: []
   }
 
-  async componentDidMount() {
-    const { read } = this.props
+  componentDidMount() {
+    this.fetchData()
+  }
 
-    const { count, data } = await read()
+  componentDidUpdate(prevProps) {
+    if (prevProps.page !== this.props.page) {
+      this.fetchData()
+    }
+  }
+
+  fetchData = async () => {
+    const { read, page } = this.props
+
+    const { count, data } = await read(Number(page))
 
     this.setState({
       count,
@@ -24,7 +34,7 @@ class Read extends Component {
   }
 
   render() {
-    const { module, head, body, caption } = this.props
+    const { module, head, body, caption, page } = this.props
     const { count, data } = this.state
 
     if (data.length === 0) {
@@ -36,6 +46,7 @@ class Read extends Component {
       head,
       body,
       rows: data,
+      count,
       actions: {
         edit: `/dashboard/${module}/update`,
         delete: `/dashboard/${module}/delete`
@@ -50,8 +61,9 @@ class Read extends Component {
 
         <Pagination
           theme="primary"
+          page={page}
           total={count}
-          url={`/dashboard/${module}/page/`}
+          url={`/dashboard/${module}?page=`}
         />
       </div>
     )
@@ -63,7 +75,8 @@ Read.propTypes = {
   module: propTypes.module,
   read: propTypes.read,
   head: propTypes.head,
-  body: propTypes.body
+  body: propTypes.body,
+  page: propTypes.page
 }
 
 export default Read

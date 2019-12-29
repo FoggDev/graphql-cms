@@ -3,6 +3,7 @@ import {
   bool,
   element,
   func,
+  number,
   object,
   oneOfType,
   shape,
@@ -32,6 +33,7 @@ export default {
   module: string,
   login: func,
   onClick: func,
+  page: number,
   read: func,
   schema: object,
   user: shape({

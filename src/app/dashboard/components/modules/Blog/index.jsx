@@ -13,9 +13,9 @@ import Read from '@actions/Read'
 // Schema
 import schema from '@schemas/blog'
 
-const Blog = ({ action = 'read', user, id = null }) => {
+const Blog = ({ action = 'read', user, id = null, page }) => {
   const { create, getPosts } = useContext(BlogContext)
-  console.log('ID', id)
+
   if (action === 'create') {
     return (
       <FormProvider initialValues={{ userId: user.id }}>
@@ -36,6 +36,7 @@ const Blog = ({ action = 'read', user, id = null }) => {
         read={getPosts}
         head={['Title', 'Reading Time', 'Language', 'Published', 'Created At', 'Tags']}
         body={['title', 'readingTime', 'language', 'published', 'createdAt', 'tags.name']}
+        page={page}
       />
     )
   }
