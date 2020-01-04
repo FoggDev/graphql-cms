@@ -164,7 +164,7 @@ class Create extends Component {
 
   render() {
     const { values } = this.context
-    const { module, schema = false } = this.props
+    const { caption, schema = false } = this.props
     const { errorMessage, successMessage } = this.state
 
     if (!schema) {
@@ -173,7 +173,7 @@ class Create extends Component {
 
     return (
       <div className={styles.create}>
-        <h1>Create {module}</h1>
+        <h1>Create {caption}</h1>
 
         <RenderIf isTrue={errorMessage}>
           <Alert danger center flat style={{ display: 'inline-block' }}>
@@ -205,7 +205,7 @@ Create.contextType = FormContext
 
 Create.propTypes = {
   create: propTypes.create,
-  module: propTypes.module,
+  caption: propTypes.caption,
   schema: propTypes.schema
 }
 

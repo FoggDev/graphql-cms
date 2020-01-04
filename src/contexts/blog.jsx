@@ -1,74 +1,31 @@
 // Dependencies
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
 import propTypes from '@propTypes'
 import { useApolloClient } from 'react-apollo-hooks'
+import { validateFields } from 'fogg-utils'
 
 // Mutations
 import CREATE_POST from '@graphql/blog/createPost.mutation'
 
+// Queries
+import GET_POSTS from '@graphql/blog/getPosts.query'
+import GET_POSTS_COUNT from '@graphql/blog/getPostsCount.query'
+
 // Validations
-const validations = {
-  userId: {
-    len: {
-      arg: 36,
-      msg: 'Invalid ID'
-    }
-  },
-  title: {
-    isEmpty: {
-      msg: 'Title is empty'
-    }
-  },
-  content: {
-    isEmpty: {
-      msg: 'Content is empty'
-    }
-  }
-}
-
-function validate(validations, values) {
-  const messages = {}
-
-  Object.keys(validations).forEach(field => {
-    const { len, isEmpty } = validations[field]
-
-    if (len && len.arg) {
-      if (values[field].length !== len.arg) {
-        messages[field] = {
-          msg: len.msg
-        }
-      }
-    }
-
-    if (isEmpty) {
-      if (values[field] === '' || !values[field]) {
-        messages[field] = {
-          msg: isEmpty.msg
-        }
-      }
-    }
-  })
-
-  return Object.keys(messages).length > 0
-    ? {
-      error: true,
-      alert: 'Error trying to create the post',
-      messages
-    }
-    : {
-      error: false
-    }
-}
+import validations from '@validations/blog'
 
 export const BlogContext = createContext({
-  create: async () => undefined
+  create: async () => undefined,
+  read: async () => undefined,
+  posts: []
 })
 
 const BlogProvider = ({ children }) => {
-  const { mutate } = useApolloClient()
+  const { mutate, query } = useApolloClient()
+  const [posts, setPosts] = useState([])
 
   async function create(values) {
-    let messages = validate(validations, values)
+    let messages = validateFields(validations, values, 'Error trying to create the post')
 
     if (messages.error) {
       return messages
@@ -105,8 +62,35 @@ const BlogProvider = ({ children }) => {
     }
   }
 
+  async function read(page) {
+    const { data: count } = await query({
+      query: GET_POSTS_COUNT
+    })
+
+    const { data } = await query({
+      query: GET_POSTS,
+      variables: {
+        orderBy: 'createdAt',
+        direction: 'DESC',
+        limit: 10,
+        offset: page === 1 ? 0 : (page - 1) * 10
+      }
+    })
+
+    if (count && data) {
+      setPosts(data.getPosts)
+
+      return {
+        count: count.getPostsCount.count,
+        data: data.getPosts
+      }
+    }
+  }
+
   const context = {
-    create
+    create,
+    read,
+    posts
   }
 
   return (
