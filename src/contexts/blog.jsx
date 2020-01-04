@@ -64,7 +64,7 @@ const BlogProvider = ({ children }) => {
 
   async function getPosts(page) {
     const { data: count } = await query({
-      query: GET_POSTS_COUNT,
+      query: GET_POSTS_COUNT
     })
 
     const { data } = await query({
