@@ -54,7 +54,9 @@ class Login extends Component {
         <div className={styles.login}>
           <div className={cx(styles.wrapper, ready ? styles.ready : '')}>
             <div className={styles.form}>
-              <Logo center />
+              <div className={styles.logo}>
+                <Logo center />
+              </div>
 
               <Input
                 autoComplete="off"

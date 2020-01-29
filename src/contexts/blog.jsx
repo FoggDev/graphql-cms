@@ -10,6 +10,7 @@ import CREATE_POST from '@graphql/blog/createPost.mutation'
 // Queries
 import GET_POSTS from '@graphql/blog/getPosts.query'
 import GET_POSTS_COUNT from '@graphql/blog/getPostsCount.query'
+import GET_POST_BY_ID from '@graphql/blog/getPostById.query'
 
 // Validations
 import validations from '@validations/blog'
@@ -17,6 +18,7 @@ import validations from '@validations/blog'
 export const BlogContext = createContext({
   create: async () => undefined,
   read: async () => undefined,
+  get: async () => undefined,
   posts: []
 })
 
@@ -87,9 +89,23 @@ const BlogProvider = ({ children }) => {
     }
   }
 
+  async function get(id) {
+    const { data } = await query({
+      query: GET_POST_BY_ID,
+      variables: {
+        id
+      }
+    })
+
+    if (data) {
+      return data.getPostById
+    }
+  }
+
   const context = {
     create,
     read,
+    get,
     posts
   }
 

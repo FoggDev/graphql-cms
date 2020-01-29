@@ -59,7 +59,7 @@ class Read extends Component {
         <Table data={tableData} />
 
         <Pagination
-          theme="success"
+          theme="primary"
           page={page}
           total={count}
           url={`/dashboard/${module}?page=`}
