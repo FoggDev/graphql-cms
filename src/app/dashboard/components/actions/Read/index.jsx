@@ -1,72 +1,60 @@
 // Dependencies
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table, Pagination, PrimaryButton } from 'fogg-ui'
 import propTypes from '@propTypes'
 
 // Styles
 import styles from './Read.scss'
 
-class Read extends Component {
-  state = {
-    count: 0,
-    data: []
+const Read = ({ module, head, body, read, caption, page }) => {
+  // States
+  const [count, setCount] = useState(0)
+  const [data, setData] = useState([])
+
+  // Methods
+  const fetchData = async () => {
+    const response = await read(Number(page))
+
+    setCount(response.count)
+    setData(response.data)
   }
 
-  componentDidMount() {
-    this.fetchData()
+  // Effects
+  useEffect(() => {
+    fetchData()
+  }, [data, page])
+
+  // Render
+  if (data.length === 0) {
+    return null
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.page !== this.props.page) {
-      this.fetchData()
+  const tableData = {
+    caption,
+    head,
+    body,
+    rows: data,
+    count,
+    actions: {
+      edit: `/dashboard/${module}/update`,
+      delete: `/dashboard/${module}/delete`
     }
   }
 
-  fetchData = async () => {
-    const { read, page } = this.props
-    const { count, data } = await read(Number(page))
+  return (
+    <div className={styles.read}>
+      <PrimaryButton href={`/dashboard/${module}/create`}>Create</PrimaryButton>
 
-    this.setState({
-      count,
-      data
-    })
-  }
+      <Table data={tableData} />
 
-  render() {
-    const { module, head, body, caption, page } = this.props
-    const { count, data } = this.state
-
-    if (data.length === 0) {
-      return null
-    }
-
-    const tableData = {
-      caption,
-      head,
-      body,
-      rows: data,
-      count,
-      actions: {
-        edit: `/dashboard/${module}/update`,
-        delete: `/dashboard/${module}/delete`
-      }
-    }
-
-    return (
-      <div className={styles.read}>
-        <PrimaryButton href={`/dashboard/${module}/create`}>Create</PrimaryButton>
-
-        <Table data={tableData} />
-
-        <Pagination
-          theme="success"
-          page={page}
-          total={count}
-          url={`/dashboard/${module}?page=`}
-        />
-      </div>
-    )
-  }
+      <Pagination
+        theme="success"
+        page={page}
+        total={count}
+        url={`/dashboard/${module}?page=`}
+      />
+    </div>
+  )
 }
 
 Read.propTypes = {
