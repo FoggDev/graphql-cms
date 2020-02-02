@@ -104,7 +104,7 @@ const Update = memo(({ get, update, id, caption, schema }) => {
 
       <form>
         <Fields
-          schema={schema}
+          schema={updatedSchema}
           values={values}
           messages={messages}
           handleInputChange={handleInputChange}
