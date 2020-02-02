@@ -23,7 +23,7 @@
     "express": "4.17.1",
     "express-session": "1.17.0",
     "fogg-ui": "1.4.4",
-    "fogg-utils": "1.1.7",
+    "fogg-utils": "1.1.9",
     "graphql": "14.5.8",
     "jsonwebtoken": "8.5.1",
     "next": "9.1.7",
