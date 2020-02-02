@@ -19,7 +19,7 @@ const Blog = ({ action = 'read', user, id = null, page }) => {
 
   if (action === 'create') {
     return (
-      <FormProvider>
+      <FormProvider initialValues={{ userId: user.id }}>>
         <Create
           caption="Post"
           schema={schema}
@@ -44,7 +44,7 @@ const Blog = ({ action = 'read', user, id = null, page }) => {
 
   if (action === 'update') {
     return (
-      <FormProvider initialValues={{ userId: user.id }}>
+      <FormProvider>
         <Update
           caption="Post"
           id={id}
