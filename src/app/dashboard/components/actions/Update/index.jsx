@@ -73,7 +73,7 @@ const Update = memo(({ get, update, id, caption, schema }) => {
   }, [ready])
 
   // Render
-  if (!updateSchema) {
+  if (!updatedSchema) {
     return <p>You need to define a schema</p>
   }
 
