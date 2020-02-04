@@ -1,5 +1,5 @@
 // Dependencies
-import React from 'react'
+import React, { memo } from 'react'
 import {
   Input,
   Select,
@@ -12,8 +12,9 @@ import propTypes from '@propTypes'
 // Styles
 import styles from './Fields.scss'
 
-const Fields = ({ schema, values, messages, handleInputChange, setValue, randomKey }) => {
+const Fields = memo(({ schema, values, messages, handleInputChange, setValue, randomKey }) => {
   const fields = Object.keys(schema).map(field => {
+    const { tags = [] } = values
     const { label, type, options, slug, theme, defaultValue } = schema[field]
     let currentValue = values[field]
 
@@ -93,6 +94,7 @@ const Fields = ({ schema, values, messages, handleInputChange, setValue, randomK
           </div>
 
           <Select
+            key={`select-${randomKey}`}
             label={`Select ${field}`}
             name={field}
             type={theme}
@@ -113,7 +115,11 @@ const Fields = ({ schema, values, messages, handleInputChange, setValue, randomK
             {messages[field] ? <span className={styles.error}>{messages[field].msg}</span> : ''}
           </div>
 
-          <Tags key={`tags-${randomKey}`} getTags={tags => setValue(field, tags)} />
+          <Tags
+            key={`tags-${randomKey}`}
+            getTags={tags => setValue(field, tags)}
+            tags={tags}
+          />
         </div>
       )
     }
@@ -126,7 +132,7 @@ const Fields = ({ schema, values, messages, handleInputChange, setValue, randomK
       {fields}
     </div>
   )
-}
+})
 
 Fields.propTypes = {
   schema: propTypes.schema,

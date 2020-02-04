@@ -25,6 +25,7 @@ export default {
   content: string,
   create: func,
   currentUrl: string,
+  get: func,
   handleInputChange: func,
   head: array,
   href: string,
@@ -41,6 +42,7 @@ export default {
   schema: object,
   setValue: func,
   values: object,
+  update: func,
   user: shape({
     id: string,
     username: string,

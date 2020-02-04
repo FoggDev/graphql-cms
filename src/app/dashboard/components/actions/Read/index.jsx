@@ -48,7 +48,7 @@ const Read = ({ read, page, module, head, body, caption }) => {
       <Table data={tableData} />
 
       <Pagination
-        theme="success"
+        theme="primary"
         page={page}
         total={count}
         url={`/dashboard/${module}?page=`}

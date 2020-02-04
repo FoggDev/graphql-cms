@@ -14,13 +14,13 @@ const Logo = props => {
 
   return (
     <div className={`${styles.logo} ${center && styles.center} ${isotype && styles.isotype}`}>
-      <Link href="/" title="Codejobs">
+      <Link href="/" title="ContentPI">
         <Retina src="/images/logo.png" />
 
         {!isotype && (
           <span className={styles.brand}>
-            <span className={styles.code}>CODE</span>
-            <span className={styles.jobs}>JOBS</span>
+            <span className={styles.first}>CONTENT</span>
+            <span className={styles.second}>PI</span>
           </span>
         )}
       </Link>

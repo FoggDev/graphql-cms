@@ -5,6 +5,7 @@ import propTypes from '@propTypes'
 export const FormContext = createContext({
   handleInputChange: () => undefined,
   setValue: () => undefined,
+  setValues: () => undefined,
   clearValues: () => undefined,
   clearValue: () => undefined,
   values: {}
@@ -12,6 +13,12 @@ export const FormContext = createContext({
 
 const FormProvider = ({ children, initialValues = {} }) => {
   const [state, setState] = useState(initialValues)
+
+  function setValues(values) {
+    const newState = Object.assign({}, state, values)
+
+    setState(newState)
+  }
 
   function setValue(name, value) {
     if (state[name] !== value) {
@@ -50,6 +57,7 @@ const FormProvider = ({ children, initialValues = {} }) => {
   const context = {
     handleInputChange,
     setValue,
+    setValues,
     clearValues,
     clearValue,
     values: state

@@ -6,10 +6,12 @@ import { validateFields } from 'fogg-utils'
 
 // Mutations
 import CREATE_POST from '@graphql/blog/createPost.mutation'
+import UPDATE_POST from '@graphql/blog/updatePost.mutation'
 
 // Queries
 import GET_POSTS from '@graphql/blog/getPosts.query'
 import GET_POSTS_COUNT from '@graphql/blog/getPostsCount.query'
+import GET_POST_BY_ID from '@graphql/blog/getPostById.query'
 
 // Validations
 import validations from '@validations/blog'
@@ -17,6 +19,8 @@ import validations from '@validations/blog'
 export const BlogContext = createContext({
   create: async () => undefined,
   read: async () => undefined,
+  update: async () => undefined,
+  get: async () => undefined,
   posts: []
 })
 
@@ -87,9 +91,53 @@ const BlogProvider = ({ children }) => {
     }
   }
 
+  async function get(id) {
+    const { data } = await query({
+      query: GET_POST_BY_ID,
+      variables: {
+        id
+      }
+    })
+
+    if (data) {
+      return data.getPostById
+    }
+  }
+
+  async function update(values) {
+    let messages = validateFields(validations, values, 'Error trying to update the post')
+
+    if (messages.error) {
+      return messages
+    }
+
+    const { errors, data } = await mutate({
+      mutation: UPDATE_POST,
+      variables: values,
+      errorPolicy: 'all'
+    })
+
+    if (errors && errors.length > 0) {
+      messages = {
+        error: true,
+        alert: `Error trying to update the post: "${values.title}"`
+      }
+    }
+
+    if (messages.error) {
+      return messages
+    }
+
+    if (data) {
+      return data.updatePost
+    }
+  }
+
   const context = {
     create,
     read,
+    update,
+    get,
     posts
   }
 
