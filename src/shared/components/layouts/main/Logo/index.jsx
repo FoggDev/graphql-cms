@@ -19,8 +19,8 @@ const Logo = props => {
 
         {!isotype && (
           <span className={styles.brand}>
-            <span className={styles.code}>CODE</span>
-            <span className={styles.jobs}>JOBS</span>
+            <span className={styles.first}>CONTENT</span>
+            <span className={styles.second}>PI</span>
           </span>
         )}
       </Link>
