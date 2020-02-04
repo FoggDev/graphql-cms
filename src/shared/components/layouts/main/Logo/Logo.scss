@@ -32,12 +32,16 @@
 
     .brand {
       font-family: $openSans;
-      font-size: $xLarge;
+      font-size: 29px;
       font-weight: $bold;
       vertical-align: middle;
 
-      .code {
+      .first {
         color: $lochmara;
+      }
+
+      .second {
+        color: #00bde5;
       }
     }
   }

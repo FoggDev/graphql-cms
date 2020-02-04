@@ -5,7 +5,7 @@ import {
   PrimaryButton,
   RenderIf
 } from 'fogg-ui'
-import { getRandomCode } from 'fogg-utils'
+import { getRandomCode, scrollToTop } from 'fogg-utils'
 import propTypes from '@propTypes'
 
 // Components
@@ -40,6 +40,8 @@ const Create = ({ create, caption, schema = false }) => {
       setMessages({})
       setRandomKey(getRandomCode())
     }
+
+    scrollToTop()
   }
 
   // Render

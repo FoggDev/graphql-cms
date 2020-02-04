@@ -9,16 +9,17 @@ import { BlogContext } from '@contexts/blog'
 // Actions
 import Create from '@actions/Create'
 import Read from '@actions/Read'
+import Update from '@actions/Update'
 
 // Schema
 import schema from '@schemas/blog'
 
 const Blog = ({ action = 'read', user, id = null, page }) => {
-  const { create, read } = useContext(BlogContext)
-  console.log('ID', id)
+  const { create, read, update, get } = useContext(BlogContext)
+
   if (action === 'create') {
     return (
-      <FormProvider initialValues={{ userId: user.id }}>
+      <FormProvider initialValues={{ userId: user.id }}>>
         <Create
           caption="Post"
           schema={schema}
@@ -38,6 +39,20 @@ const Blog = ({ action = 'read', user, id = null, page }) => {
         body={['title', 'readingTime', 'language', 'published', 'createdAt', 'tags.name']}
         page={page}
       />
+    )
+  }
+
+  if (action === 'update') {
+    return (
+      <FormProvider>
+        <Update
+          caption="Post"
+          id={id}
+          get={get}
+          update={update}
+          schema={schema}
+        />
+      </FormProvider>
     )
   }
 }
